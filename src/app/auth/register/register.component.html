@@ -1,0 +1,23 @@
+<div class="registry">
+  <p>Create an account</p>
+  <form>
+    <div>
+      <label for="rEmail">Email</label>
+      <input id="rEmail" placeholder="Email" #email>
+    </div>
+    <div>
+      <label for="rUsername">Username</label>
+      <input id="rUsername" placeholder="Username" #username>
+    </div>
+    <div>
+      <label for="rPassword">Password</label>
+      <input type="password" id="rPassword" placeholder="Password" #password>
+    </div>
+    <div>
+      <label for="rRepeatPassword">RepeatPassword</label>
+      <input type="password" id="rRepeatPassword" placeholder="RepeatPassword" #repeatPassword>
+    </div>
+  </form>
+
+  <button type="button" class="btn btn-primary" (click)="createUser(email.value, username.value, password.value, repeatPassword.value)">Confirm</button>
+</div>

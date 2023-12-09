@@ -1,0 +1,51 @@
+.text {
+  font-family: sans-serif;
+}
+
+ul {
+  list-style: none;
+  width: 100%;
+  padding: 0;
+  overflow: auto;
+  margin: 0 auto
+}
+
+ul li {
+  float: left;
+}
+
+
+.pictureUrl {
+  float: left;
+  margin: 0;
+  width: 400px;
+  height: 400px;
+  padding: 50px;
+}
+
+img {
+  display: block;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.p {
+  float: left;
+  margin: 50px 0 0 0;
+  padding: 0 30px 20px 30px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.12);
+}
+
+.price {
+  margin-left: 5px;
+  font-size: 2em;
+}
+
+.description {
+  margin-left: 5px;
+  font-size: 2em;
+}
