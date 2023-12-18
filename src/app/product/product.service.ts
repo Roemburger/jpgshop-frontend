@@ -42,14 +42,12 @@ export class ProductService {
       headers: new HttpHeaders().set('Authorization', 'Bearer ' + storedToken)
     };
 
-    this.http.post<Product>(this.baseUrl + "/admin/createProduct", product, options)
+    this.http.post<Product>(this.baseUrl + "/createProduct", product, options)
       .subscribe({
         next: () => console.log("Created product successfully"),
         error: () => console.log("Error: could not create product")
       });
   }
-
-
 
   public getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl + "/getProducts");

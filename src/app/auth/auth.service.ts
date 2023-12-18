@@ -8,6 +8,8 @@ import {User} from "./user.model";
 export class AuthService {
 
   baseUrl: string = "http://localhost:8080/api/auth"
+  isLoggedIn: boolean = false;
+  isAdmin: boolean = true;
 
   constructor(private productService: ProductService,
               private router: Router,
@@ -18,7 +20,10 @@ export class AuthService {
     return this.http.post<User>(this.baseUrl + "/register", user, {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }).subscribe({
-      next: () => console.log("User registered successfully."),
+      next: () => {
+        console.log("User registered successfully.")
+        this.router.navigate(['/auth/login']);
+      },
       error: () => console.log("Error: User was not registered.")
     })
   }
@@ -34,9 +39,19 @@ export class AuthService {
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('email', JSON.stringify(email));
         console.log("Login was successful")
+        this.isLoggedIn = true;
+        this.isAdmin = true;
         this.router.navigate(['/']);
     },
       error: () => console.log("Error: Could not login. Try again later.")
     });
+  }
+
+  public logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    this.isLoggedIn = false;
+    this.isAdmin = false;
+    this.router.navigate(['/auth/login']);
   }
 }

@@ -10,6 +10,8 @@ import {ProductModule} from "./product/product.module";
 import {HeaderModule} from "./header/header.module";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthModule} from "./auth/auth.module";
+import { CartComponent } from './cart/cart.component';
+import {CartModule} from "./cart/cart.module";
 
 @NgModule({
   declarations: [
@@ -24,6 +26,7 @@ import {AuthModule} from "./auth/auth.module";
     HeaderModule,
     HttpClientModule,
     AuthModule,
+    CartModule
   ],
   providers: [ProductService, HttpClientModule],
   bootstrap: [AppComponent]

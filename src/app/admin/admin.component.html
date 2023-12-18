@@ -17,11 +17,7 @@
       <label for="pPrice">Price</label>
       <input type="number" id="pPrice" placeholder="Price" #price>
     </div>
-    <div>
-      <label for="pQuantity">Quantity</label>
-      <input type="number" id="pQuantity" placeholder="Quantity" #quantity>
-    </div>
   </form>
 
-  <button type="button" class="btn btn-primary" (click)="createProductByAdmin(name.value, description.value, pictureUrl.value, price.value, quantity.value)">Confirm product</button>
+  <button type="button" class="btn btn-primary" (click)="createProductByAdmin(name.value, description.value, pictureUrl.value, price.value)">Confirm product</button>
 </div>
