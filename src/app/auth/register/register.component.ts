@@ -1,6 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
 import {User} from "../user.model";
 import {AuthService} from "../auth.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,7 @@ export class RegisterComponent {
   @ViewChild('password') password: any;
   @ViewChild('repeatPassword') repeatPassword: any;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private toastrService: ToastrService) {
   }
 
   createUser(email: string, username: string, password: string, repeatPassword: string) {
@@ -23,6 +24,7 @@ export class RegisterComponent {
     this.user.password = password;
 
     if (password !== repeatPassword) {
+      this.toastrService.error("Password and repeated password do not match.");
       return;
     }
 

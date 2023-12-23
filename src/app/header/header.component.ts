@@ -8,14 +8,16 @@ import {AuthService} from "../auth/auth.service";
   providers: [AuthService],
 })
 export class HeaderComponent implements OnInit {
-  isLoggedIn: boolean = false;
-  isAdmin: boolean = true;
+  isLoggedIn: boolean | undefined;
+  isAdmin: boolean | undefined;
 
-  constructor(private authService: AuthService) {
+  constructor(protected authService: AuthService) {
   }
 
   ngOnInit(): void {
-    this.isLoggedIn = this.authService.isLoggedIn;
-    this.isAdmin = this.authService.isAdmin;
+    this.isLoggedIn = this.authService.isUserLoggedIn();
+    console.log(this.isLoggedIn)
+    this.isAdmin = this.authService.isUserAdmin();
+    console.log(this.isAdmin)
   }
 }

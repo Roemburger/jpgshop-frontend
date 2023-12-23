@@ -1,1 +1,21 @@
-<p>cart works!</p>
+<body>
+<ul>
+  <li *ngFor="let product of cartContent; let i = index">
+    <div class="card">
+      <p class="name">{{product.name}}</p>
+      <div class="quantity">
+        <p class="amount">Amount: </p>
+        <input type="number" class="inputQuantity" [value]="product.quantity" (blur)="checkQuantity($event, i)">
+      </div>
+      <div class="subTotal">
+        <p>{{product.price * product.quantity | currency :'EUR':'symbol':'1.2'}}</p>
+      </div>
+
+      <button class="btn btn-md btn-primary" (click)="deleteCartItem(i)">Delete product</button>
+    </div>
+  </li>
+</ul>
+
+<p>Total amount to pay: {{amountToPay | currency :'EUR':'symbol':'1.2'}}</p>
+<button class="btn btn-md btn-primary" (click)="putOrder(amountToPay)">Pay</button>
+</body>

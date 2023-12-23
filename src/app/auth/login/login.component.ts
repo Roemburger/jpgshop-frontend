@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from "../auth.service";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-login',
@@ -7,23 +8,23 @@ import {AuthService} from "../auth.service";
   styleUrls: ['./login.component.css'],
   providers: [AuthService],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private toastrService: ToastrService) {
+  }
+
+  ngOnInit(): void {
   }
 
   login(email: string, password: string) {
-    if (!this.isValidInput(email, password)) return;
-    this.authService.login(email, password);
-  }
-
-  isValidInput(email: string, password: string) {
-    if (email === undefined) return false;
-
-    if (password === undefined || password.length < 8) {
-      return false;
+    if (email === undefined) {
+      this.toastrService.error("Email address needs input.");
     }
 
-    return true;
+    if (password === undefined || password.length < 8) {
+      this.toastrService.error("Password needs at least 8 characters.")
+    }
+
+    this.authService.login(email, password);
   }
 }

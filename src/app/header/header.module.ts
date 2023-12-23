@@ -11,8 +11,8 @@ import {RouterModule} from "@angular/router";
     HeaderComponent
   ],
   imports: [
-    CommonModule,
-    RouterModule
+    RouterModule,
+    CommonModule
   ]
 })
 export class HeaderModule {}

@@ -5,7 +5,6 @@
       <p class="name">{{product.name}}</p>
       <p class="description">{{product.description}}</p>
       <p class="price">{{product.price | currency :'EUR':'symbol':'1.2'}}</p>
-      <p class="quantity">{{product.quantity}}</p>
 
       <button class="btn btn-md btn-primary" (click)="addProductToShoppingCart(product.id)">Add to cart</button>
     </div>

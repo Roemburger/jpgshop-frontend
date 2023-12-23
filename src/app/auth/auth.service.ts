@@ -3,17 +3,18 @@ import {Router} from "@angular/router";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ProductService} from "../product/product.service";
 import {User} from "./user.model";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable()
 export class AuthService {
-
   baseUrl: string = "http://localhost:8080/api/auth"
-  isLoggedIn: boolean = false;
-  isAdmin: boolean = true;
+  isLoggedIn: boolean | undefined;
+  isAdmin: boolean | undefined;
+  email = JSON.parse(<string>localStorage.getItem('email'));
 
-  constructor(private productService: ProductService,
-              private router: Router,
-              private http: HttpClient) {
+  constructor(private router: Router,
+              private http: HttpClient,
+              private toastrService: ToastrService) {
   }
 
   public register(user: User) {
@@ -21,10 +22,10 @@ export class AuthService {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     }).subscribe({
       next: () => {
-        console.log("User registered successfully.")
+        this.toastrService.success("User registered successfully.")
         this.router.navigate(['/auth/login']);
       },
-      error: () => console.log("Error: User was not registered.")
+      error: () => this.toastrService.error("Error: User was not registered.")
     })
   }
 
@@ -38,20 +39,39 @@ export class AuthService {
       next: (token: any) => {
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('email', JSON.stringify(email));
-        console.log("Login was successful")
-        this.isLoggedIn = true;
-        this.isAdmin = true;
+        this.toastrService.success("Login was successful")
+        this.isLoggedIn = this.isUserLoggedIn();
+        this.isAdmin = this.isUserAdmin();
         this.router.navigate(['/']);
     },
-      error: () => console.log("Error: Could not login. Try again later.")
+      error: () => this.toastrService.error("Error: Could not login. Try again later.")
     });
+  }
+
+  isUserLoggedIn(): boolean {
+    return this.email != null;
+  }
+
+  isUserAdmin(): boolean {
+    return this.email == "test@test.com"
   }
 
   public logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
-    this.isLoggedIn = false;
-    this.isAdmin = false;
-    this.router.navigate(['/auth/login']);
+    this.isLoggedIn = this.isUserLoggedIn();
+    this.isAdmin = this.isUserAdmin();
+    this.router.navigate(['/login']);
+  }
+
+  getJwtToken(): string | null {
+    const storedToken = localStorage.getItem('token');
+
+    if (storedToken !== null && storedToken !== undefined) {
+      return Object.values(JSON.parse(storedToken)).toString();
+    } else {
+      this.toastrService.info("You need to login first.");
+      return null;
+    }
   }
 }

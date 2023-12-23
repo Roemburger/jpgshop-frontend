@@ -2,28 +2,32 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Product} from "./product.model";
 import {ProductService} from "./product.service";
 import {Subscription} from "rxjs";
+import {ToastrService} from "ngx-toastr";
+import {CartService} from "../cart/cart.service";
+import {AuthService} from "../auth/auth.service";
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css']
+  styleUrls: ['./product.component.css'],
+  providers: [AuthService]
 })
 export class ProductComponent implements OnInit, OnDestroy {
   products: Product[]=[];
   private subscription: Subscription = new Subscription();
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private toastrService: ToastrService, private cartService: CartService) {
   }
 
   ngOnInit() {
     this.subscription = this.productService.getProducts().subscribe((p: Product[]) => {
       this.products = p;
     })
-    console.log("Loaded products successfully.")
   }
 
   addProductToShoppingCart(id: number) {
-    this.productService.addProductToShoppingCart(this.products.find(p => p.id === id));
+    this.cartService.addProductToShoppingCart(this.products.find(p => p.id === id));
+    this.toastrService.success("Product is added to cart.");
   }
 
   ngOnDestroy(): void {

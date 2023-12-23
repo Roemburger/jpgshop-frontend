@@ -10,8 +10,11 @@ import {ProductModule} from "./product/product.module";
 import {HeaderModule} from "./header/header.module";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthModule} from "./auth/auth.module";
-import { CartComponent } from './cart/cart.component';
 import {CartModule} from "./cart/cart.module";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {CommonModule} from "@angular/common";
+import {AuthService} from "./auth/auth.service";
 
 @NgModule({
   declarations: [
@@ -26,9 +29,12 @@ import {CartModule} from "./cart/cart.module";
     HeaderModule,
     HttpClientModule,
     AuthModule,
-    CartModule
+    CartModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    CommonModule,
   ],
-  providers: [ProductService, HttpClientModule],
+  providers: [ProductService, HttpClientModule, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
