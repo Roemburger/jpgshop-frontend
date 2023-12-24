@@ -16,7 +16,7 @@ export class ProductComponent implements OnInit, OnDestroy {
   products: Product[]=[];
   private subscription: Subscription = new Subscription();
 
-  constructor(private productService: ProductService, private toastrService: ToastrService, private cartService: CartService) {
+  constructor(private authService: AuthService, private productService: ProductService, private toastrService: ToastrService, private cartService: CartService) {
   }
 
   ngOnInit() {
@@ -26,6 +26,10 @@ export class ProductComponent implements OnInit, OnDestroy {
   }
 
   addProductToShoppingCart(id: number) {
+    if (!this.authService.isUserLoggedIn()) {
+      this.toastrService.error("Login first.");
+      return;
+    }
     this.cartService.addProductToShoppingCart(this.products.find(p => p.id === id));
     this.toastrService.success("Product is added to cart.");
   }

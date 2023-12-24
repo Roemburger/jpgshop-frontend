@@ -6,10 +6,6 @@
       <input id="pName" placeholder="Name" #name>
     </div>
     <div>
-      <label for="pDescription">Description</label>
-      <input id="pDescription" placeholder="Description" #description>
-    </div>
-    <div>
       <label for="pPictureUrl">Picture url</label>
       <input id="pPictureUrl" placeholder="Picture url" #pictureUrl>
     </div>
@@ -19,5 +15,5 @@
     </div>
   </form>
 
-  <button type="button" class="btn btn-primary" (click)="createProductByAdmin(name.value, description.value, pictureUrl.value, price.value)">Confirm product</button>
+  <button type="button" class="btn btn-primary" (click)="createProductByAdmin(name.value, pictureUrl.value, price.value)">Confirm product</button>
 </div>

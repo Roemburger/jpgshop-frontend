@@ -13,9 +13,8 @@ export class AdminComponent {
 
   constructor(private productService: ProductService, private toastrService: ToastrService) {}
 
-  createProductByAdmin(name: string, description: string, pictureUrl: string, price: string) {
+  createProductByAdmin(name: string, pictureUrl: string, price: string) {
     this.product.name = name;
-    this.product.description = description;
     this.product.pictureUrl = pictureUrl;
     this.product.price = Number(price);
 
