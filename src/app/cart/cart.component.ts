@@ -33,23 +33,13 @@ export class CartComponent implements OnInit {
   getAmountToPay(products: Product[]): number {
     let amount = 0;
     for (let p of products) {
-      amount += p.price * p.quantity;
+      amount += p.price;
       this.amountToPay = Number(
         Number(Math
           .round(amount*100) / 100)
           .toFixed(2));
     }
     return amount;
-  }
-
-  checkQuantity(event: any, index: number) {
-    const quantity = +event.target.value;
-    if (quantity < 1) {
-      event.target.value = this.cartContent[index].quantity;
-      return;
-    }
-    this.cartContent[index].quantity = quantity;
-    this.cartService.setShoppingCart(this.cartContent);
   }
 
   deleteCartItem(index: number) {

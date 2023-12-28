@@ -35,8 +35,23 @@ export class ProductComponent implements OnInit, OnDestroy {
       this.toastrService.error("Login first.");
       return;
     }
-    this.cartService.addProductToShoppingCart(this.products.find(p => p.id === id));
-    this.toastrService.success("Product is added to cart.");
+    let prod = this.products.find(p => p.id === id);
+    if (prod !== undefined) {
+      prod.quantity = 1;
+    }
+    let msg: string = this.cartService.addProductToShoppingCart(prod);
+    switch (msg) {
+      default:
+      case "Something went wrong. Try again later.":
+        this.toastrService.error(msg);
+        break;
+      case "Product is already in cart.":
+        this.toastrService.error(msg);
+        break;
+      case "Product is added to cart.":
+        this.toastrService.success(msg);
+        break;
+    }
   }
 
   ngOnDestroy(): void {

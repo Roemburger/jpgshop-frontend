@@ -28,10 +28,10 @@ export class CartService {
     localStorage.setItem('cart', JSON.stringify(items))
   }
 
-  addProductToShoppingCart(product: Product | undefined) {
+  addProductToShoppingCart(product: Product | undefined): string {
     const prod = JSON.parse(<any>localStorage.getItem('cart'));
     let productAlive: Product | undefined;
-    if (product == undefined) return;
+    if (product == undefined) return "Something went wrong. Try again later.";
 
     if (prod) {
       productAlive = prod.find((p: {id: number}) => {
@@ -40,8 +40,7 @@ export class CartService {
     }
 
     if (productAlive) {
-      productAlive.quantity++;
-      this.setShoppingCart(prod);
+      return "Product is already in cart.";
     } else {
       if (prod) {
         const newItem = [...prod, product];
@@ -52,6 +51,7 @@ export class CartService {
         this.setShoppingCart(this.tempShoppingCart);
       }
     }
+    return "Product is added to cart."
   }
 
   createOrder(debits: string) {
