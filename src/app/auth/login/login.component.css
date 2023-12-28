@@ -1,60 +1,76 @@
 .wrapper {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+  background-color: #f8f8f8;
+  color: #333;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
-.title {
-  position: absolute;
-  font-size: xx-large;
-  font-family: sans-serif;
-  margin: 0;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-}
-
-a {
+.wrapper .title {
+  font-size: 1.5em;
+  color: #555;
+  font-weight: bold;
   text-decoration: none;
-  color: black;
-  margin-left: 30px;
-  font-family: sans-serif;
 }
 
-.nav {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
+.wrapper .nav a {
+  text-decoration: none;
+  color: #555;
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.nav a {
-  position: relative;
+.wrapper .nav a.active {
+  font-weight: bold;
+}
+
+.wrapper .nav a:hover {
+  text-decoration: underline;
+}
+
+.login {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 0 20px 20px 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+}
+
+.login p {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.login label {
   display: block;
-  margin: 5px;
-  width: 100px;
-  float: left;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
 
-.nav a span {
-  position: absolute;
-  top: 50%;
-  right: 30px;
-  transform: translateY(-50%);
+.login input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
 }
 
-.nav a i {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
+.login button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
-:host {
-  position: relative;
-  display: block;
-  background-color: aliceblue;
-  height: 60px;
+.login button:hover {
+  background-color: #0056b3;
 }

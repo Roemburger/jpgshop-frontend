@@ -1,5 +1,7 @@
 <div class="wrapper">
-  <p class="title"><a routerLink="/">JpgShop</a></p>
+  <div class="title">
+    <a routerLink="/"><span>JpgShop</span></a>
+  </div>
   <div class="nav">
     <a *ngIf="isLoggedIn && isAdmin" routerLinkActive="active" routerLink="/admin"><span>Admin</span></a>
     <a *ngIf="isLoggedIn" routerLinkActive="active" routerLink="/cart"><span>Cart</span></a>
@@ -9,13 +11,13 @@
   </div>
 </div>
 
-<ul>
-  <li *ngFor="let product of products">
+<div class="product-list">
+  <div *ngFor="let product of products">
     <div class="card">
       <img class="pictureUrl" src="{{product.pictureUrl}}" alt="{{product.name}}">
       <p class="name">{{product.name}}</p>
       <p class="price">{{product.price | currency :'EUR':'symbol':'1.2'}}</p>
       <button class="btn btn-md btn-primary" (click)="addProductToShoppingCart(product.id)">Add to cart</button>
     </div>
-  </li>
-</ul>
+  </div>
+</div>

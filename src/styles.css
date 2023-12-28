@@ -1,3 +1,29 @@
-.toast-center {
-  margin-top: 10%;
+body {
+  font-family: sans-serif;
+}
+
+.toast-success {
+  background-color: #28a745;
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toast-error {
+  background-color: #dc3545;
+  color: #fff;
+  border-radius: 4px;
+  padding: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

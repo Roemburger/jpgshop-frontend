@@ -1,60 +1,112 @@
 .wrapper {
-  position: relative;
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.25), 0 5px 5px rgba(0,0,0,0.22);
+  background-color: #f8f8f8;
+  color: #333;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
 }
 
-.title {
-  position: absolute;
-  font-size: xx-large;
-  font-family: sans-serif;
-  margin: 0;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-}
-
-a {
+.wrapper .title {
+  font-size: 1.5em;
+  color: #555;
+  font-weight: bold;
   text-decoration: none;
-  color: black;
-  margin-left: 30px;
-  font-family: sans-serif;
 }
 
-.nav {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
+.wrapper .nav a {
+  text-decoration: none;
+  color: #555;
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
-.nav a {
-  position: relative;
-  display: block;
-  margin: 5px;
-  width: 100px;
-  float: left;
+.wrapper .nav a.active {
+  font-weight: bold;
 }
 
-.nav a span {
-  position: absolute;
-  top: 50%;
-  right: 30px;
-  transform: translateY(-50%);
+.wrapper .nav a:hover {
+  text-decoration: underline;
 }
 
-.nav a i {
-  position: absolute;
-  top: 50%;
-  right: 0;
-  transform: translateY(-50%);
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
-:host {
-  position: relative;
-  display: block;
-  background-color: aliceblue;
-  height: 60px;
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0 10px 10px 10px;
+  margin: 10px 20px 10px 0;
+  background-color: #f8f8f8;
+}
+
+.card p.name {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.card .quantity {
+  display: flex;
+  align-items: center;
+}
+
+.card .quantity p.amount {
+  margin-right: 5px;
+}
+
+.card .inputQuantity {
+  width: 60px;
+  padding: 5px;
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.card .subTotal {
+  font-weight: bold;
+  color: #007bff;
+  margin-top: 10px;
+}
+
+.card button {
+  background-color: #555;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #333;
+}
+
+.pay {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0 10px 10px 10px;
+  margin: 10px 10px 10px 0;
+  background-color: #f8f8f8;
+}
+
+.pay button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.pay button:hover {
+  background-color: #0056b3;
 }

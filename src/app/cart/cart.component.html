@@ -1,5 +1,7 @@
 <div class="wrapper">
-  <p class="title"><a routerLink="/">JpgShop</a></p>
+  <div class="title">
+    <a routerLink="/"><span>JpgShop</span></a>
+  </div>
   <div class="nav">
     <a *ngIf="isAdmin" routerLinkActive="active" routerLink="/admin"><span>Admin</span></a>
     <a *ngIf="isLoggedIn" routerLinkActive="active" routerLink="/cart"><span>Cart</span></a>
@@ -8,8 +10,8 @@
 </div>
 
 <body>
-<ul>
-  <li *ngFor="let product of cartContent; let i = index">
+<div class="product-list">
+  <div *ngFor="let product of cartContent; let i = index">
     <div class="card">
       <p class="name">{{product.name}}</p>
       <div class="quantity">
@@ -22,9 +24,12 @@
 
       <button class="btn btn-md btn-primary" (click)="deleteCartItem(i)">Delete product</button>
     </div>
-  </li>
-</ul>
+  </div>
+</div>
 
-<p>Total amount to pay: {{amountToPay | currency :'EUR':'symbol':'1.2'}}</p>
-<button class="btn btn-md btn-primary" (click)="putOrder(amountToPay)">Pay</button>
+<div class="pay">
+  <p>Total amount to pay: {{amountToPay | currency :'EUR':'symbol':'1.2'}}</p>
+  <button class="btn btn-md btn-primary" (click)="putOrder(amountToPay)">Pay</button>
+</div>
+
 </body>

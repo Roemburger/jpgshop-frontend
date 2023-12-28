@@ -1,5 +1,7 @@
 <div class="wrapper">
-  <p class="title"><a routerLink="/">JpgShop</a></p>
+  <div class="title">
+    <a routerLink="/"><span>JpgShop</span></a>
+  </div>
   <div class="nav">
     <a *ngIf="isAdmin" routerLinkActive="active" routerLink="/admin"><span>Admin</span></a>
     <a *ngIf="isLoggedIn" routerLinkActive="active" routerLink="/cart"><span>Cart</span></a>
@@ -8,7 +10,7 @@
 </div>
 
 <div *ngIf="isAdmin" class="inputByAdmin">
-  <p>Add new product</p>
+  <h3>Add new product</h3>
   <form>
     <div>
       <label for="pName">Name</label>
