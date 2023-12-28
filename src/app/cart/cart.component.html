@@ -21,9 +21,13 @@
   </div>
 </div>
 
-<div class="pay">
+<div *ngIf="!isCartEmpty" class="pay">
   <p>Total amount to pay: {{amountToPay | currency :'EUR':'symbol':'1.2'}}</p>
-  <button class="btn btn-md btn-primary" (click)="putOrder(amountToPay)">Pay</button>
+  <button class="btn btn-md btn-primary" (click)="proceedToCheckout(amountToPay)">Proceed to checkout</button>
+</div>
+
+<div *ngIf="isCartEmpty" class="pay">
+  <p>Empty cart.</p>
 </div>
 
 </body>

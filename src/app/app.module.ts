@@ -14,6 +14,7 @@ import {ToastrModule} from "ngx-toastr";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {CommonModule} from "@angular/common";
 import {AuthService} from "./auth/auth.service";
+import {OrderModule} from "./order/order.module";
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import {AuthService} from "./auth/auth.service";
     ToastrModule.forRoot({timeOut: 2000, newestOnTop: false}),
     BrowserAnimationsModule,
     CommonModule,
+    OrderModule
   ],
   providers: [ProductService, HttpClientModule, AuthService],
   bootstrap: [AppComponent]

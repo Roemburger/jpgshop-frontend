@@ -1,0 +1,88 @@
+.wrapper {
+  background-color: #f8f8f8;
+  color: #333;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.wrapper .title {
+  font-size: 1.5em;
+  color: #555;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.wrapper .nav a {
+  text-decoration: none;
+  color: #555;
+  margin-left: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.wrapper .nav a.active {
+  font-weight: bold;
+}
+
+.wrapper .nav a:hover {
+  text-decoration: underline;
+}
+
+.inputOrderDetails {
+  width: 300px;
+  padding: 0 20px 20px 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 20px;
+  background-color: #f8f8f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.inputOrderDetails h3 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.inputOrderDetails form div.row {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.inputOrderDetails form div.half-width {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.inputOrderDetails label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.inputOrderDetails input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.inputOrderDetails button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.inputOrderDetails button:hover {
+  background-color: #0056b3;
+}

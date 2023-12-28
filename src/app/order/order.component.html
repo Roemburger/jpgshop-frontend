@@ -1,0 +1,56 @@
+<div class="wrapper">
+  <div class="title">
+    <a routerLink="/"><span>JpgShop</span></a>
+  </div>
+  <div class="nav">
+    <a *ngIf="isAdmin" routerLinkActive="active" routerLink="/admin"><span>Admin</span></a>
+    <a *ngIf="isLoggedIn" routerLinkActive="active" routerLink="/cart"><span>Cart</span></a>
+    <a *ngIf="isLoggedIn" routerLinkActive="active" (click)="authService.logout()" routerLink="/login"><span>Logout</span></a>
+  </div>
+</div>
+
+
+<div class="inputOrderDetails">
+  <h3>Fill in your address</h3>
+  <form>
+    <div class="row">
+      <div class="half-width">
+        <label for="pFirstName">First name</label>
+        <input id="pFirstName" placeholder="FirstName" #firstName>
+      </div>
+      <div class="half-width">
+        <label for="pLastName">Last name</label>
+        <input id="pLastName" placeholder="LastName" #lastName>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half-width">
+        <label for="pStreetName">Street name</label>
+        <input id="pStreetName" placeholder="Street name" #streetName>
+      </div>
+      <div class="half-width">
+        <label for="pHouseNumber">House number</label>
+        <input type="number" id="pHouseNumber" placeholder="House number" #houseNumber>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half-width">
+        <label for="pZipCode">Zip code</label>
+        <input id="pZipCode" placeholder="Zip code" #zipCode>
+      </div>
+      <div class="half-width">
+        <label for="pCountry">Country</label>
+        <input id="pCountry" placeholder="Country" #country>
+      </div>
+    </div>
+    <div class="row">
+      <div class="half-width">
+        <label for="pPrice">Price</label>
+        <input type="number" id="pPrice" placeholder="Price" #price>
+      </div>
+    </div>
+  </form>
+
+  <button type="button" class="btn btn-primary" (click)="processOrderDetails(
+  firstName.value, lastName.value, streetName.value, houseNumber.value, zipCode.value, country.value, price.value)">Confirm order</button>
+</div>

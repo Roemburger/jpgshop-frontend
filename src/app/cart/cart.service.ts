@@ -1,10 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Product} from "../product/product.model";
 import {BehaviorSubject} from "rxjs";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {ToastrService} from "ngx-toastr";
-import {AuthService} from "../auth/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -14,11 +10,7 @@ export class CartService {
   tempShoppingCart: Product[]=[];
   behaviorSubject = new BehaviorSubject([])
 
-  constructor(
-    private router: Router,
-    private http: HttpClient,
-    private toastrService: ToastrService,
-    private authService: AuthService) {}
+  constructor() {}
 
   getShoppingCart(): Product[] {
     return JSON.parse(<any>localStorage.getItem('cart'));
@@ -52,26 +44,5 @@ export class CartService {
       }
     }
     return "Product is added to cart."
-  }
-
-  createOrder(debits: string) {
-    const token = this.authService.getJwtToken();
-    if (!token) return;
-    let options = {
-      headers: new HttpHeaders()
-        .set('Auth', 'Bearer ' + token)
-        .set('Content-Type', 'application/json')
-    }
-    return this.http.patch(
-      this.baseUrl + '/createOrder',
-      {debits: debits},
-      options).subscribe({
-      next: () => {
-        this.setShoppingCart([]);
-        this.toastrService.success('Order is successfully created.');
-        this.router.navigate(['/']);
-      },
-      error: () => this.toastrService.error('Something went wrong. Try again later.')
-    })
   }
 }

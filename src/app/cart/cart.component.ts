@@ -3,6 +3,8 @@ import {Product} from "../product/product.model";
 import {CartService} from "./cart.service";
 import {AuthService} from "../auth/auth.service";
 import {Location} from "@angular/common";
+import {OrderService} from "../order/order.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-cart',
@@ -15,8 +17,14 @@ export class CartComponent implements OnInit {
   amountToPay: number = 0.0;
   isAdmin: boolean | undefined;
   isLoggedIn: boolean | undefined;
+  isCartEmpty: boolean | undefined;
 
-  constructor(private location: Location, protected authService: AuthService, private cartService: CartService) {
+  constructor(
+    private location: Location,
+    protected authService: AuthService,
+    private cartService: CartService,
+    private orderService: OrderService,
+    private router: Router) {
   }
 
   ngOnInit() {
@@ -24,14 +32,12 @@ export class CartComponent implements OnInit {
     this.amountToPay = this.getAmountToPay(this.cartContent);
     this.isAdmin = this.authService.isUserAdmin();
     this.isLoggedIn = this.authService.isUserLoggedIn();
-  }
-
-  putOrder(debits: number) {
-    this.cartService.createOrder(debits.toString());
-    localStorage.removeItem('cart');
+    this.isCartEmpty = this.checkIsCartEmpty();
   }
 
   getAmountToPay(products: Product[]): number {
+    if (!products) return 0.0;
+
     let amount = 0;
     for (let p of products) {
       amount += p.price;
@@ -43,9 +49,18 @@ export class CartComponent implements OnInit {
     return amount;
   }
 
+  checkIsCartEmpty(): boolean {
+    return this.amountToPay === 0.00;
+  }
+
   deleteCartItem(index: number) {
     this.cartContent.splice(index, 1);
     this.cartService.setShoppingCart(this.cartContent);
     window.location.reload();
+  }
+
+  proceedToCheckout(debits: number) {
+    this.orderService.proceedToOrder(debits);
+    this.router.navigate(['/order']);
   }
 }
