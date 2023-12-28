@@ -7,7 +7,6 @@ import {RouterModule} from "@angular/router";
 import {AdminModule} from "./admin/admin.module";
 import {ProductService} from "./product/product.service";
 import {ProductModule} from "./product/product.module";
-import {HeaderModule} from "./header/header.module";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthModule} from "./auth/auth.module";
 import {CartModule} from "./cart/cart.module";
@@ -26,7 +25,6 @@ import {AuthService} from "./auth/auth.service";
     RouterModule,
     ProductModule,
     AdminModule,
-    HeaderModule,
     HttpClientModule,
     AuthModule,
     CartModule,
