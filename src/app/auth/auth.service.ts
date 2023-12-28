@@ -23,7 +23,7 @@ export class AuthService {
     }).subscribe({
       next: () => {
         this.toastrService.success("User registered successfully.")
-        this.router.navigate(['/auth/login']);
+        this.router.navigate(['/login']);
       },
       error: () => this.toastrService.error("Error: User was not registered.")
     })

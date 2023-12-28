@@ -15,14 +15,19 @@ import {AuthService} from "../auth/auth.service";
 export class ProductComponent implements OnInit, OnDestroy {
   products: Product[]=[];
   private subscription: Subscription = new Subscription();
+  isLoggedIn: boolean | undefined;
+  isAdmin: boolean | undefined;
 
-  constructor(private authService: AuthService, private productService: ProductService, private toastrService: ToastrService, private cartService: CartService) {
+  constructor(protected authService: AuthService, private productService: ProductService, private toastrService: ToastrService, private cartService: CartService) {
   }
 
   ngOnInit() {
     this.subscription = this.productService.getProducts().subscribe((p: Product[]) => {
       this.products = p;
     })
+
+    this.isLoggedIn = this.authService.isUserLoggedIn();
+    this.isAdmin = this.authService.isUserAdmin();
   }
 
   addProductToShoppingCart(id: number) {

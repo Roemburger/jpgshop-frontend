@@ -1,4 +1,13 @@
-<div class="inputByAdmin">
+<div class="wrapper">
+  <p class="title"><a routerLink="/">JpgShop</a></p>
+  <div class="nav">
+    <a *ngIf="isAdmin" routerLinkActive="active" routerLink="/admin"><span>Admin</span></a>
+    <a *ngIf="isLoggedIn" routerLinkActive="active" routerLink="/cart"><span>Cart</span></a>
+    <a *ngIf="isLoggedIn" routerLinkActive="active" (click)="authService.logout()" routerLink="/login"><span>Logout</span></a>
+  </div>
+</div>
+
+<div *ngIf="isAdmin" class="inputByAdmin">
   <p>Add new product</p>
   <form>
     <div>

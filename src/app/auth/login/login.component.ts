@@ -9,11 +9,13 @@ import {ToastrService} from "ngx-toastr";
   providers: [AuthService],
 })
 export class LoginComponent implements OnInit {
+  isLoggedIn: boolean | undefined;
 
-  constructor(private authService: AuthService, private toastrService: ToastrService) {
+  constructor(protected authService: AuthService, private toastrService: ToastrService) {
   }
 
   ngOnInit(): void {
+    this.isLoggedIn = this.authService.isUserLoggedIn();
   }
 
   login(email: string, password: string) {

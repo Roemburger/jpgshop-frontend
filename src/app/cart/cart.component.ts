@@ -12,13 +12,17 @@ import {AuthService} from "../auth/auth.service";
 export class CartComponent implements OnInit {
   cartContent: Product[] = []
   amountToPay: number = 0.0;
+  isAdmin: boolean | undefined;
+  isLoggedIn: boolean | undefined;
 
-  constructor(private cartService: CartService) {
+  constructor(protected authService: AuthService, private cartService: CartService) {
   }
 
   ngOnInit() {
     this.cartContent = this.cartService.getShoppingCart();
     this.amountToPay = this.getAmountToPay(this.cartContent);
+    this.isAdmin = this.authService.isUserAdmin();
+    this.isLoggedIn = this.authService.isUserLoggedIn();
   }
 
   putOrder(debits: number) {

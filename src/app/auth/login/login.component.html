@@ -1,3 +1,12 @@
+<div class="wrapper">
+  <p class="title"><a routerLink="/">JpgShop</a></p>
+  <div class="nav">
+    <a *ngIf="!isLoggedIn" routerLinkActive="active" routerLink="/register"><span>Register</span></a>
+    <a *ngIf="!isLoggedIn" routerLinkActive="active" routerLink="/login"><span>Login</span></a>
+  </div>
+</div>
+
+
 <div class="login">
   <p>Log into your account</p>
   <form>
