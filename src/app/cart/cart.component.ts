@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Product} from "../product/product.model";
 import {CartService} from "./cart.service";
 import {AuthService} from "../auth/auth.service";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-cart',
@@ -15,7 +16,7 @@ export class CartComponent implements OnInit {
   isAdmin: boolean | undefined;
   isLoggedIn: boolean | undefined;
 
-  constructor(protected authService: AuthService, private cartService: CartService) {
+  constructor(private location: Location, protected authService: AuthService, private cartService: CartService) {
   }
 
   ngOnInit() {
@@ -45,5 +46,6 @@ export class CartComponent implements OnInit {
   deleteCartItem(index: number) {
     this.cartContent.splice(index, 1);
     this.cartService.setShoppingCart(this.cartContent);
+    window.location.reload();
   }
 }

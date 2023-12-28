@@ -28,7 +28,7 @@ import {AuthService} from "./auth/auth.service";
     HttpClientModule,
     AuthModule,
     CartModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({timeOut: 2000, newestOnTop: false}),
     BrowserAnimationsModule,
     CommonModule,
   ],
