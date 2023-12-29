@@ -37,12 +37,12 @@
 .product-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
 }
 
 .card {
-  width: 165px;
+  width: 200px;
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 10px;
