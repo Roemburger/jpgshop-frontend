@@ -25,7 +25,7 @@ export class ProductService {
   public createProduct(product: Product) {
     const storedToken = this.authService.getJwtToken();
 
-    if (storedToken === null) {
+    if (storedToken === '') {
       this.toastrService.error("No token available. Unable to create product.");
       return;
     }

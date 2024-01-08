@@ -11,6 +11,7 @@ export class AuthService {
   isLoggedIn: boolean | undefined;
   isAdmin: boolean | undefined;
   email = JSON.parse(<string>localStorage.getItem('email'));
+  token = JSON.parse(<string>localStorage.getItem('token'));
 
   constructor(private router: Router,
               private http: HttpClient,
@@ -39,6 +40,10 @@ export class AuthService {
       next: (token: any) => {
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('email', JSON.stringify(email));
+
+        console.log('JSON.stringify token = ' + JSON.stringify(token));
+        console.log('JSON.stringify email = ' + JSON.stringify(email));
+
         this.toastrService.success("Login was successful")
         this.isLoggedIn = this.isUserLoggedIn();
         this.isAdmin = this.isUserAdmin();
@@ -56,6 +61,10 @@ export class AuthService {
     return this.email == "test@test.com"
   }
 
+  getToken(): string {
+    return this.token;
+  }
+
   public logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
@@ -64,14 +73,23 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  getJwtToken(): string | null {
-    const storedToken = localStorage.getItem('token');
+  getJwtToken(): string {
+    const storedToken = this.getToken();
+    console.log('Storedtoken = ' + this.token);
 
-    if (storedToken !== null && storedToken !== undefined) {
-      return Object.values(JSON.parse(storedToken)).toString();
-    } else {
-      this.toastrService.info("You need to login first.");
-      return null;
+    try {
+      const parsedToken = storedToken ? JSON.parse(storedToken) : null;
+      console.log('Parsedtoken = ' + parsedToken);
+      if (parsedToken !== null && typeof parsedToken === 'object') {
+        return Object.values(parsedToken).toString();
+      } else {
+        this.toastrService.error('Invalid token format');
+      }
+    } catch (error) {
+      console.error('Error parsing token:', error);
+      this.toastrService.info('You need to login first.');
     }
+    return '';
   }
+
 }
