@@ -7,7 +7,7 @@ import {ToastrService} from "ngx-toastr";
 
 @Injectable()
 export class AuthService {
-  baseUrl: string = "http://localhost:8080/api/auth"
+  baseUrl: string = "http://51.38.114.113:8080/api/auth"
   isLoggedIn: boolean | undefined;
   isAdmin: boolean | undefined;
   email = JSON.parse(<string>localStorage.getItem('email'));

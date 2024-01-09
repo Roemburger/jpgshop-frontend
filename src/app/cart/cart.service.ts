@@ -6,7 +6,7 @@ import {BehaviorSubject} from "rxjs";
   providedIn: 'root'
 })
 export class CartService {
-  baseUrl: string = "http://localhost:8080/api/cart"
+  baseUrl: string = "http://51.38.114.113:8080/api/cart"
   tempShoppingCart: Product[]=[];
   behaviorSubject = new BehaviorSubject([])
 

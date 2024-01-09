@@ -10,7 +10,7 @@ import {Order} from "./order.model";
   providedIn: 'root'
 })
 export class OrderService {
-  baseUrl: string = "http://localhost:8080/api/order"
+  baseUrl: string = "http://51.38.114.113:8080/api/order"
   debits: number = 0.0;
 
   constructor(private router: Router,
