@@ -45,12 +45,12 @@
     </div>
     <div class="row">
       <div class="half-width">
-        <label for="pPrice">Price</label>
-        <input type="number" id="pPrice" placeholder="Price" #price>
+        <label>Price</label>
+        <label class="pPrice">{{this.amountToPay | currency :'EUR':'symbol':'1.2'}}</label>
       </div>
     </div>
   </form>
 
   <button type="button" class="btn btn-primary" (click)="processOrderDetails(
-  firstName.value, lastName.value, streetName.value, houseNumber.value, zipCode.value, country.value, price.value)">Confirm order</button>
+  firstName.value, lastName.value, streetName.value, houseNumber.value, zipCode.value, country.value)">Confirm order</button>
 </div>

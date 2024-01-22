@@ -4,17 +4,20 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {ProductService} from "../product/product.service";
 import {User} from "./user.model";
 import {ToastrService} from "ngx-toastr";
+import {CartService} from "../cart/cart.service";
 
 @Injectable()
 export class AuthService {
   baseUrl: string = "http://51.38.114.113:8080/api/auth"
   isLoggedIn: boolean | undefined;
   isAdmin: boolean | undefined;
-  email = JSON.parse(<string>localStorage.getItem('email'));
-  token = JSON.parse(<string>localStorage.getItem('token'));
+  email = localStorage.getItem('email');
+  token = localStorage.getItem('token');
+
 
   constructor(private router: Router,
               private http: HttpClient,
+              private cartService: CartService,
               private toastrService: ToastrService) {
   }
 
@@ -24,6 +27,8 @@ export class AuthService {
     }).subscribe({
       next: () => {
         this.toastrService.success("User registered successfully.")
+        localStorage.removeItem('cart');
+        this.cartService.setShoppingCart([]);
         this.router.navigate(['/login']);
       },
       error: () => this.toastrService.error("Error: User was not registered.")
@@ -32,6 +37,8 @@ export class AuthService {
 
   public login(email: string, password: string) {
     localStorage.removeItem('token');
+    localStorage.removeItem('cart');
+    this.cartService.setShoppingCart([]);
     return this.http.post(this.baseUrl + "/login", {
       "email": email, "password": password
     }, {
@@ -62,8 +69,9 @@ export class AuthService {
   }
 
   getToken(): string {
-    return this.token;
+    return this.token || '';
   }
+
 
   public logout() {
     localStorage.removeItem('token');
