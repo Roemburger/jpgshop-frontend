@@ -15,8 +15,6 @@ import {Router} from "@angular/router";
 export class CartComponent implements OnInit {
   cartContent: Product[] = []
   amountToPay: number = 0.0;
-  isAdmin: boolean | undefined;
-  isLoggedIn: boolean | undefined;
   isCartEmpty: boolean | undefined;
 
   constructor(
@@ -30,8 +28,6 @@ export class CartComponent implements OnInit {
   ngOnInit() {
     this.cartContent = this.cartService.getShoppingCart();
     this.amountToPay = this.getAmountToPay(this.cartContent);
-    this.isAdmin = this.authService.isUserAdmin();
-    this.isLoggedIn = this.authService.isUserLoggedIn();
     this.isCartEmpty = this.checkIsCartEmpty();
   }
 

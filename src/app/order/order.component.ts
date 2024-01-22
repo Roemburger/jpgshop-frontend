@@ -14,8 +14,6 @@ import {CartService} from "../cart/cart.service";
   providers: [AuthService],
 })
 export class OrderComponent implements OnInit {
-  isAdmin: boolean | undefined;
-  isLoggedIn: boolean | undefined;
   cartContent: Product[] = []
   amountToPay: number = 0.0;
 
@@ -27,8 +25,6 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isAdmin = this.authService.isUserAdmin();
-    this.isLoggedIn = this.authService.isUserLoggedIn();
     this.cartContent = this.cartService.getShoppingCart();
     this.amountToPay = this.getAmountToPay(this.cartContent);
   }

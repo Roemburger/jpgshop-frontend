@@ -9,10 +9,8 @@ import {CartService} from "../cart/cart.service";
 @Injectable()
 export class AuthService {
   baseUrl: string = "http://51.38.114.113:8080/api/auth"
-  isLoggedIn: boolean | undefined;
-  isAdmin: boolean | undefined;
-  email = localStorage.getItem('email');
-  token = localStorage.getItem('token');
+  email = JSON.parse(<string>localStorage.getItem('email'));
+  token = JSON.parse(<string>localStorage.getItem('token'));
 
 
   constructor(private router: Router,
@@ -48,12 +46,11 @@ export class AuthService {
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('email', JSON.stringify(email));
 
-        console.log('JSON.stringify token = ' + JSON.stringify(token));
-        console.log('JSON.stringify email = ' + JSON.stringify(email));
+        this.token = JSON.stringify(token);
+        this.email = JSON.stringify(email);
 
-        this.toastrService.success("Login was successful")
-        this.isLoggedIn = this.isUserLoggedIn();
-        this.isAdmin = this.isUserAdmin();
+        this.toastrService.success("Login was successful");
+
         this.router.navigate(['/']);
     },
       error: () => this.toastrService.error("Error: Could not login. Try again later.")
@@ -65,39 +62,32 @@ export class AuthService {
   }
 
   isUserAdmin(): boolean {
-    return this.email == "test@test.com"
+    return this.email == "test@test.com";
   }
 
   getToken(): string {
-    return this.token || '';
+    return localStorage.getItem('token') || '';
   }
 
 
   public logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('email');
-    this.isLoggedIn = this.isUserLoggedIn();
-    this.isAdmin = this.isUserAdmin();
     this.router.navigate(['/login']);
   }
 
   getJwtToken(): string {
     const storedToken = this.getToken();
-    console.log('Storedtoken = ' + this.token);
-
-    try {
-      const parsedToken = storedToken ? JSON.parse(storedToken) : null;
-      console.log('Parsedtoken = ' + parsedToken);
-      if (parsedToken !== null && typeof parsedToken === 'object') {
-        return Object.values(parsedToken).toString();
-      } else {
-        this.toastrService.error('Invalid token format');
+    if (storedToken) {
+      try {
+        const tokenObject = JSON.parse(storedToken);
+        return tokenObject.token || '';
+      } catch (error) {
+        console.error('Error parsing token:', error);
+        this.toastrService.error('Jwt token error.');
+        return '';
       }
-    } catch (error) {
-      console.error('Error parsing token:', error);
-      this.toastrService.info('You need to login first.');
     }
     return '';
   }
-
 }

@@ -3,9 +3,9 @@
     <a routerLink="/"><span>JpgShop</span></a>
   </div>
   <div class="nav">
-    <a *ngIf="isAdmin" routerLinkActive="active" routerLink="/admin"><span>Admin</span></a>
-    <a *ngIf="isLoggedIn" routerLinkActive="active" routerLink="/cart"><span>Cart</span></a>
-    <a *ngIf="isLoggedIn" routerLinkActive="active" (click)="authService.logout()" routerLink="/login"><span>Logout</span></a>
+    <a *ngIf="authService.isUserAdmin()" routerLinkActive="active" routerLink="/admin"><span>Admin</span></a>
+    <a *ngIf="authService.isUserLoggedIn()" routerLinkActive="active" routerLink="/cart"><span>Cart</span></a>
+    <a *ngIf="authService.isUserLoggedIn()" routerLinkActive="active" (click)="authService.logout()" routerLink="/login"><span>Logout</span></a>
   </div>
 </div>
 

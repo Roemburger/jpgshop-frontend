@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {User} from "../user.model";
 import {AuthService} from "../auth.service";
 import {ToastrService} from "ngx-toastr";
@@ -9,18 +9,13 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./register.component.css'],
   providers: [AuthService],
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   user: User = {} as User;
-  isLoggedIn: boolean | undefined;
 
   @ViewChild('password') password: any;
   @ViewChild('repeatPassword') repeatPassword: any;
 
   constructor(protected authService: AuthService, private toastrService: ToastrService) {
-  }
-
-  ngOnInit(): void {
-    this.isLoggedIn = this.authService.isUserLoggedIn();
   }
 
   createUser(email: string, username: string, password: string, repeatPassword: string) {

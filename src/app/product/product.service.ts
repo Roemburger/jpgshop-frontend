@@ -31,7 +31,9 @@ export class ProductService {
     }
 
     let options = {
-      headers: new HttpHeaders().set('Auth', 'Bearer ' + storedToken)
+      headers: new HttpHeaders()
+        .set('Authorization', 'Bearer ' + storedToken)
+        .set('Content-Type', 'application/json')
     };
 
     this.http.post<Product>(this.baseUrl + "/createProduct", product, options)

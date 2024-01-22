@@ -39,7 +39,7 @@ export class OrderService {
   //   if (token === '') return;
   //   let options = {
   //     headers: new HttpHeaders()
-  //       .set('Auth', 'Bearer ' + token)
+  //       .set('Authorization', 'Bearer ' + token)
   //       .set('Content-Type', 'application/json')
   //   }
   //   return this.http.patch(

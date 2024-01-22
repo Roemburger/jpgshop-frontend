@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from "../auth.service";
 import {ToastrService} from "ngx-toastr";
 
@@ -8,14 +8,9 @@ import {ToastrService} from "ngx-toastr";
   styleUrls: ['./login.component.css'],
   providers: [AuthService],
 })
-export class LoginComponent implements OnInit {
-  isLoggedIn: boolean | undefined;
+export class LoginComponent {
 
   constructor(protected authService: AuthService, private toastrService: ToastrService) {
-  }
-
-  ngOnInit(): void {
-    this.isLoggedIn = this.authService.isUserLoggedIn();
   }
 
   login(email: string, password: string) {

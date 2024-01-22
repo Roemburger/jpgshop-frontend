@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Product} from "../product/product.model";
 import {ProductService} from "../product/product.service";
 import {ToastrService} from "ngx-toastr";
@@ -9,15 +9,8 @@ import {AuthService} from "../auth/auth.service";
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent {
   product: Product = {} as Product;
-  isAdmin: boolean | undefined;
-  isLoggedIn: boolean | undefined;
-
-  ngOnInit(): void {
-    this.isLoggedIn = this.authService.isUserLoggedIn();
-    this.isAdmin = this.authService.isUserAdmin();
-  }
 
   constructor(protected authService: AuthService, private productService: ProductService, private toastrService: ToastrService) {}
 

@@ -3,33 +3,28 @@
     <a routerLink="/"><span>JpgShop</span></a>
   </div>
   <div class="nav">
-    <a *ngIf="isAdmin" routerLinkActive="active" routerLink="/admin"><span>Admin</span></a>
-    <a *ngIf="isLoggedIn" routerLinkActive="active" routerLink="/cart"><span>Cart</span></a>
-    <a *ngIf="isLoggedIn" routerLinkActive="active" (click)="authService.logout()" routerLink="/login"><span>Logout</span></a>
+    <a *ngIf="authService.isUserAdmin()" routerLinkActive="active" routerLink="/admin"><span>Admin</span></a>
+    <a *ngIf="authService.isUserLoggedIn()" routerLinkActive="active" routerLink="/cart"><span>Cart</span></a>
+    <a *ngIf="authService.isUserLoggedIn()" routerLinkActive="active" (click)="authService.logout()" routerLink="/login"><span>Logout</span></a>
   </div>
 </div>
 
-<div class="inputByAdmin">
-  <h3>COMING SOON</h3>
-  <label>Feature: Create product</label>
+<div *ngIf="authService.isUserAdmin()" class="inputByAdmin">
+  <h3>Add new product</h3>
+  <form>
+    <div>
+      <label for="pName">Name</label>
+      <input id="pName" placeholder="Name" #name>
+    </div>
+    <div>
+      <label for="pPictureUrl">Picture url</label>
+      <input id="pPictureUrl" placeholder="Picture url" #pictureUrl>
+    </div>
+    <div>
+      <label for="pPrice">Price</label>
+      <input type="number" id="pPrice" placeholder="Price" #price>
+    </div>
+  </form>
+
+  <button type="button" class="btn btn-primary" (click)="createProductByAdmin(name.value, pictureUrl.value, price.value)">Confirm product</button>
 </div>
-
-<!--<div *ngIf="isAdmin" class="inputByAdmin">-->
-<!--  <h3>Add new product</h3>-->
-<!--  <form>-->
-<!--    <div>-->
-<!--      <label for="pName">Name</label>-->
-<!--      <input id="pName" placeholder="Name" #name>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <label for="pPictureUrl">Picture url</label>-->
-<!--      <input id="pPictureUrl" placeholder="Picture url" #pictureUrl>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--      <label for="pPrice">Price</label>-->
-<!--      <input type="number" id="pPrice" placeholder="Price" #price>-->
-<!--    </div>-->
-<!--  </form>-->
-
-<!--  <button type="button" class="btn btn-primary" (click)="createProductByAdmin(name.value, pictureUrl.value, price.value)">Confirm product</button>-->
-<!--</div>-->
