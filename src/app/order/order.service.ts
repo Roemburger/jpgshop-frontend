@@ -5,6 +5,7 @@ import {ToastrService} from "ngx-toastr";
 import {AuthService} from "../auth/auth.service";
 import {CartService} from "../cart/cart.service";
 import {Order} from "./order.model";
+import {Product} from "../product/product.model";
 
 @Injectable({
   providedIn: 'root'
@@ -24,34 +25,28 @@ export class OrderService {
     this.debits = debits;
   }
 
+  createHttpHeaders(): HttpHeaders {
+    let headers: HttpHeaders = new HttpHeaders();
+    return headers.set(
+      'Authorization', 'Bearer ' + this.authService.getJwtToken()
+    )
+  }
+
   createOrder(order: Order) {
     this.cartService.setShoppingCart([]);
     localStorage.removeItem('cart');
 
-    //TODO: Do something with the order details
+    // this.http.post<Order>(this.baseUrl + "/createOrder", order, { headers: this.createHttpHeaders()})
+    //   .subscribe({
+    //     next: () => {
+    //       this.toastrService.success("Created order successfully");
+    //       this.cartService.setShoppingCart([]);
+    //       localStorage.removeItem('cart');
+    //     },
+    //     error: () => this.toastrService.error("Error: could not create order")
+    //   });
 
     this.toastrService.success('Order is successfully created.');
     this.router.navigate(['/']);
   }
-
-  // createOrder(debits: string) {
-  //   const token = this.authService.getJwtToken();
-  //   if (token === '') return;
-  //   let options = {
-  //     headers: new HttpHeaders()
-  //       .set('Authorization', 'Bearer ' + token)
-  //       .set('Content-Type', 'application/json')
-  //   }
-  //   return this.http.patch(
-  //     this.baseUrl + '/createOrder',
-  //     {debits: debits},
-  //     options).subscribe({
-  //     next: () => {
-  //       this.cartService.setShoppingCart([]);
-  //       this.toastrService.success('Order is successfully created.');
-  //       this.router.navigate(['/']);
-  //     },
-  //     error: () => this.toastrService.error('Something went wrong. Try again later.')
-  //   })
-  // }
 }
