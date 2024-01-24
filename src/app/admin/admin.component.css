@@ -73,3 +73,71 @@
 .inputByAdmin button:hover {
   background-color: #0056b3;
 }
+
+.updateByAdmin, .inputByAdmin {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 0 20px 20px 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f8f8f8;
+}
+
+.updateByAdmin h3, .inputByAdmin h3 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.updateByAdmin label, .inputByAdmin label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.updateByAdmin input, .inputByAdmin input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.updateByAdmin .productCard {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background-color: #fff;
+}
+
+.updateByAdmin .form-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.updateByAdmin .btn-primary, .inputByAdmin button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.updateByAdmin .btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.updateByAdmin .btn-primary:hover, .inputByAdmin button:hover {
+  background-color: #0056b3;
+}
+
+.updateByAdmin .btn-delete:hover {
+  background-color: #c82333;
+}

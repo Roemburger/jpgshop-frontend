@@ -22,21 +22,15 @@ export class ProductService {
     if (product) this.behaviorSubject.next(product);
   }
 
+  createHttpHeaders(): HttpHeaders {
+    let headers: HttpHeaders = new HttpHeaders();
+    return headers.set(
+      'Authorization', 'Bearer ' + this.authService.getJwtToken()
+    )
+  }
+
   public createProduct(product: Product) {
-    const storedToken = this.authService.getJwtToken();
-
-    if (storedToken === '') {
-      this.toastrService.error("No token available. Unable to create product.");
-      return;
-    }
-
-    let options = {
-      headers: new HttpHeaders()
-        .set('Authorization', 'Bearer ' + storedToken)
-        .set('Content-Type', 'application/json')
-    };
-
-    this.http.post<Product>(this.baseUrl + "/createProduct", product, options)
+    this.http.post<Product>(this.baseUrl + "/createProduct", product, { headers: this.createHttpHeaders()})
       .subscribe({
         next: () => this.toastrService.success("Created product successfully"),
         error: () => this.toastrService.error("Error: could not create product")
@@ -45,5 +39,21 @@ export class ProductService {
 
   public getProducts(): Observable<Product[]> {
     return this.http.get<Product[]>(this.baseUrl + "/getProducts");
+  }
+
+  updateProduct(productId: any, product: Product) {
+    this.http.put<Product>(this.baseUrl + `/updateProduct/${productId}`, product, { headers: this.createHttpHeaders()})
+      .subscribe({
+        next: () => this.toastrService.success("Updated product successfully"),
+        error: () => this.toastrService.error("Error: could not update product")
+      });
+  }
+
+  deleteProduct(productId: any) {
+    this.http.delete<Product>(this.baseUrl + `/deleteProduct/${productId}`, { headers: this.createHttpHeaders()})
+      .subscribe({
+        next: () => this.toastrService.success("Deleted product successfully"),
+        error: () => this.toastrService.error("Error: could not delete product")
+      })
   }
 }

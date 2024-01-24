@@ -28,3 +28,28 @@
 
   <button type="button" class="btn btn-primary" (click)="createProductByAdmin(name.value, pictureUrl.value, price.value)">Confirm product</button>
 </div>
+
+<div *ngIf="authService.isUserAdmin()" class="updateByAdmin">
+  <h3>Manage products</h3>
+
+  <div *ngFor="let product of products" class="productCard">
+    <form>
+      <div>
+        <label for="uName-{{product.id}}">Name</label>
+        <input id="uName-{{product.id}}" [(ngModel)]="product.name" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div>
+        <label for="uPictureUrl-{{product.id}}">Picture url</label>
+        <input id="uPictureUrl-{{product.id}}" [(ngModel)]="product.pictureUrl" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div>
+        <label for="uPrice-{{product.id}}">Price</label>
+        <input type="number" id="uPrice-{{product.id}}" [(ngModel)]="product.price" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn btn-primary" (click)="updateProductByAdmin(product.id, product.name, product.pictureUrl, product.price)">Update product</button>
+        <button type="button" class="btn btn-delete" (click)="deleteProductByAdmin(product.id)">Delete product</button>
+      </div>
+    </form>
+  </div>
+</div>

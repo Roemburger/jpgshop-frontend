@@ -31,9 +31,6 @@ export class ProductComponent implements OnInit, OnDestroy {
       return;
     }
     let prod = this.products.find(p => p.id === id);
-    if (prod !== undefined) {
-      prod.quantity = 1;
-    }
     let msg: string = this.cartService.addProductToShoppingCart(prod);
     switch (msg) {
       default:
