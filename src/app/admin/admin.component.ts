@@ -11,7 +11,7 @@ import {Subscription} from "rxjs";
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
-  product: Product = {} as Product;
+  cProduct: Product = {} as Product;
 
   products: Product[]=[];
   private subscription: Subscription = new Subscription();
@@ -25,19 +25,16 @@ export class AdminComponent implements OnInit {
   }
 
   createProductByAdmin(name: string, pictureUrl: string, price: string) {
-    this.product.name = name;
-    this.product.pictureUrl = pictureUrl;
-    this.product.price = Number(price);
+    this.cProduct.name = name;
+    this.cProduct.pictureUrl = pictureUrl;
+    this.cProduct.price = Number(price);
 
-    this.addProductByAdmin();
-  }
-
-  addProductByAdmin() {
-    if (this.product.name == "" || this.product.pictureUrl || isNaN(this.product.price)){
+    if (this.cProduct.name == "" || this.cProduct.pictureUrl == "" || isNaN(this.cProduct.price)){
       this.toastrService.error("All fields need input.")
       return;
     }
-    this.productService.createProduct(this.product);
+
+    this.productService.createProduct(this.cProduct);
   }
 
   updateProductByAdmin(productId: number, name: string, pictureUrl: string, price: number) {
