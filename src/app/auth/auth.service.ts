@@ -9,9 +9,6 @@ import {CartService} from "../cart/cart.service";
 @Injectable()
 export class AuthService {
   baseUrl: string = "http://51.38.114.113:8080/api/auth"
-  email = JSON.parse(<string>localStorage.getItem('email'));
-  token = JSON.parse(<string>localStorage.getItem('token'));
-
 
   constructor(private router: Router,
               private http: HttpClient,
@@ -46,9 +43,6 @@ export class AuthService {
         localStorage.setItem('token', JSON.stringify(token));
         localStorage.setItem('email', JSON.stringify(email));
 
-        this.token = JSON.stringify(token);
-        this.email = JSON.stringify(email);
-
         this.toastrService.success("Login was successful");
 
         this.router.navigate(['/']);
@@ -58,17 +52,16 @@ export class AuthService {
   }
 
   isUserLoggedIn(): boolean {
-    return this.email != null;
+    return JSON.parse(<string>localStorage.getItem('email')) != null;
   }
 
   isUserAdmin(): boolean {
-    return this.email == "test@test.com";
+    return JSON.parse(<string>localStorage.getItem('email')) == "test@test.com";
   }
 
   getToken(): string {
     return localStorage.getItem('token') || '';
   }
-
 
   public logout() {
     localStorage.removeItem('token');
