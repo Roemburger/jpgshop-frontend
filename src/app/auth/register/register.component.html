@@ -20,14 +20,18 @@
       <input id="rUsername" placeholder="Username" #username>
     </div>
     <div>
-      <label for="rPassword">Password</label>
+      <label for="rPassword">Password*</label>
       <input type="password" id="rPassword" placeholder="Password" #password>
     </div>
     <div>
-      <label for="rRepeatPassword">Repeat password</label>
+      <label for="rRepeatPassword">Repeat password*</label>
       <input type="password" id="rRepeatPassword" placeholder="Password" #repeatPassword>
     </div>
   </form>
 
   <button type="button" class="btn btn-primary" (click)="createUser(email.value, username.value, password.value, repeatPassword.value)">Confirm</button>
+
+  <div class="pwRequirements">
+    <p>*Password must be 8-20 characters long, include uppercase and lowercase letters, a number, and a special character.</p>
+  </div>
 </div>

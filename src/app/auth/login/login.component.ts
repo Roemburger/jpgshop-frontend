@@ -14,7 +14,7 @@ export class LoginComponent {
   }
 
   login(email: string, password: string) {
-    if (email === undefined) {
+    if (email === undefined || email == "") {
       this.toastrService.error("Email address needs input.");
     }
 
