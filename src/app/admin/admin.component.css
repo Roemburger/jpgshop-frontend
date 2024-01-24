@@ -141,3 +141,9 @@
 .updateByAdmin .btn-delete:hover {
   background-color: #c82333;
 }
+
+.updateByAdmin .btn-primary:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}

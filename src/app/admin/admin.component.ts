@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {Product} from "../product/product.model";
 import {ProductService} from "../product/product.service";
 import {ToastrService} from "ngx-toastr";
@@ -15,12 +15,20 @@ export class AdminComponent implements OnInit {
 
   products: Product[]=[];
   private subscription: Subscription = new Subscription();
+  originalProducts: Map<number, Product> = new Map<number, Product>();
+  changeDetectionFlag = false;
 
-  constructor(protected authService: AuthService, private productService: ProductService, private toastrService: ToastrService) {}
+  constructor(protected authService: AuthService, private productService: ProductService, private toastrService: ToastrService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
     this.subscription = this.productService.getProducts().subscribe((p: Product[]) => {
       this.products = p;
+
+      this.originalProducts.clear();
+
+      this.products.forEach(product => {
+        this.originalProducts.set(product.id, {...product});
+      });
     })
   }
 
@@ -31,6 +39,11 @@ export class AdminComponent implements OnInit {
 
     if (this.cProduct.name == "" || this.cProduct.pictureUrl == "" || isNaN(this.cProduct.price)){
       this.toastrService.error("All fields need input.")
+      return;
+    }
+
+    if (Number(price) <= 0) {
+      this.toastrService.error("Price needs to be more than zero.")
       return;
     }
 
@@ -50,6 +63,25 @@ export class AdminComponent implements OnInit {
 
     let prod = new Product(productId, name, pictureUrl, Number(price))
     this.productService.updateProduct(productId, prod);
+  }
+
+  isProductChanged(productId: number): boolean {
+    const originalProduct = this.originalProducts.get(productId);
+    const currentProduct = this.products.find(p => p.id === productId);
+
+    if (!originalProduct || !currentProduct) {
+      return false;
+    }
+
+    return originalProduct.name !== currentProduct.name ||
+      originalProduct.pictureUrl !== currentProduct.pictureUrl ||
+      originalProduct.price !== currentProduct.price;
+  }
+
+  onProductChange(productId: number): void {
+    if (this.isProductChanged(productId)) {
+      this.cdr.markForCheck();
+    }
   }
 
   deleteProductByAdmin(productId: number) {
