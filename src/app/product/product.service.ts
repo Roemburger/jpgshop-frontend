@@ -10,7 +10,7 @@ import {AuthService} from "../auth/auth.service";
   providedIn: 'root'
 })
 export class ProductService {
-  baseUrl: string = "http://51.38.114.113:8080/api/products"
+  baseUrl: string = "http://51.38.114.113/api/products"
   behaviorSubject = new BehaviorSubject([])
 
   constructor(

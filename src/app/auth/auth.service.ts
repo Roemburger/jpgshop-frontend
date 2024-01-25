@@ -8,7 +8,7 @@ import {CartService} from "../cart/cart.service";
 
 @Injectable()
 export class AuthService {
-  baseUrl: string = "http://51.38.114.113:8080/api/auth"
+  baseUrl: string = "http://51.38.114.113/api/auth"
 
   constructor(private router: Router,
               private http: HttpClient,
